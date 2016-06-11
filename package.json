@@ -1,0 +1,19 @@
+{
+  "name": "shift",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunolemos/shift.git"
+  },
+  "author": "Bruno Lemos, Caio Flores, Caio Lopes, David, Mauricio Giordano",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/brunolemos/shift/issues"
+  },
+  "homepage": "https://github.com/brunolemos/shift#readme"
+}
