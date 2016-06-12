@@ -30,7 +30,8 @@
     "nodemon": "^1.9.2",
     "passport": "^0.3.2",
     "passport-facebook-token": "^2.1.1",
-    "require-dir": "^0.3.0"
+    "require-dir": "^0.3.0",
+    "simplify-commerce": "^1.6.0"
   },
   "devDependencies": {
     "eslint": "^2.12.0",

@@ -9,7 +9,7 @@ const DeviceSchema = new Schema({
   uuid: { type: String, index: true, required: true },
   name: { type: String, required: true },
   value: { type: Number, required: true },
-  amountReceived: { type: Number },
+  amountReceived: { type: Number, default: 0 },
   description: { type: String },
   image: { type: String }
 }, { timestamps: {} });
