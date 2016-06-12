@@ -19,4 +19,8 @@ module.exports = (app) => {
   app.put('/:id', function (req, res) {
     Transaction.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, errorHandler(res));
   });
+
+  app.delete('/:id', (req, res) => {
+    Transaction.findByIdAndRemove(req.params.id, errorHandler(res));
+  });
 };

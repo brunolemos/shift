@@ -16,7 +16,15 @@ module.exports = (app) => {
     Device.findById(req.params.id, errorHandler(res));
   });
 
-  app.put('/:id', function (req, res) {
+  app.get('/uuid/:uuid', (req, res) => {
+    Device.findOne({ 'uuid': req.params.uuid}, errorHandler(res));
+  });
+
+  app.put('/:id', (req, res) => {
     Device.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, errorHandler(res));
+  });
+
+  app.delete('/:id', (req, res) => {
+    Device.findByIdAndRemove(req.params.id, errorHandler(res));
   });
 };

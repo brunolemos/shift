@@ -6,6 +6,7 @@ const { Schema } = mongoose;
 
 const DeviceSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  uuid: { type: String, index: true, required: true },
   name: { type: String, required: true },
   value: { type: Number, required: true },
   amountReceived: { type: Number },

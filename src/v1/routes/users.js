@@ -19,4 +19,8 @@ module.exports = (app) => {
   app.put('/:id', function (req, res) {
     User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, errorHandler(res));
   });
+
+  app.delete('/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id, errorHandler(res));
+  });
 };
