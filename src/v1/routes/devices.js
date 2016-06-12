@@ -18,7 +18,7 @@ module.exports = (app) => {
   });
 
   app.get('/uuid/:uuid', (req, res) => {
-    Device.findOne({ 'uuid': req.params.uuid}, errorHandler(res));
+    Device.findOne({ 'uuid': req.params.uuid}).populate('owner').exec(errorHandler(res));
   });
 
   app.put('/:id', (req, res) => {
@@ -31,6 +31,6 @@ module.exports = (app) => {
 
   // Get device transactions (history)
   app.get('/:id/transactions', (req, res) => {
-    Transaction.find({ 'device': req.params.id}).populate('owner').exec(errorHandler(res));
+    Transaction.find({ 'device': req.params.id}, errorHandler(res));
   });
 };
