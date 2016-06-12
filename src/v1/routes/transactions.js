@@ -23,9 +23,9 @@ module.exports = (app) => {
         return errorHandler(res)(errorSimplify, data);
       }
 
-      console.log('Payment Status: ' + data.paymentStatus, data);
+      console.log('Payment: ' + data.paymentStatus, data.id, data);
 
-      params.paymentStatus = data.paymentStatus;
+      params.payment = data || {};
 
       new Transaction(params).save((errorTransaction, transaction) => {
         if (errorTransaction || !transaction) return errorHandler(res)(errorTransaction, transaction);

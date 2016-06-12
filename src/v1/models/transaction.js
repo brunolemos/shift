@@ -8,7 +8,7 @@ const TransactionSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   value: { type: Number, required: true },
   token: { type: String, required: true },
-  paymentStatus: { type: String }
+  payment: { type: Object }
 }, { timestamps: {} });
 
 module.exports = mongoose.model('Transaction', TransactionSchema);
