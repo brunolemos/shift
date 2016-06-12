@@ -1,16 +1,16 @@
 'use strict';
 
-const FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookTokenStrategy = require('passport-facebook-token').Strategy;
 const config = require('../../config');
 const User = require('../../../src/v1/models/user');
 
 const { clientID, clientSecret, callbackURL } = config.integrations.facebook;
-const facebookStrategy = new FacebookStrategy({
+const facebookTokenStrategy = new FacebookTokenStrategy({
     clientID,
     clientSecret,
     callbackURL,
     profileFields: ['id', 'email', 'displayName', 'gender']
-  }, (accessToken, refreshToken, profile, done) => {
+  }, (token, refreshToken, profile, done) => {
     process.nextTick(() => {
       const email = profile.email || profile.emails[0].value;
       const query = { $or: [{ email }, { 'accounts.facebook.id': profile.id }] };
@@ -18,7 +18,7 @@ const facebookStrategy = new FacebookStrategy({
       const data = {
         'accounts.facebook': {
           _id: profile.id,
-          accessToken,
+          token,
           refreshToken
         }
       };
@@ -32,4 +32,4 @@ const facebookStrategy = new FacebookStrategy({
   }
 );
 
-module.exports = facebookStrategy;  
+module.exports = facebookTokenStrategy;

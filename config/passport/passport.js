@@ -2,7 +2,7 @@
 
 module.exports = (app) => {
   const passport = require('passport');
-  const facebookStrategy = require('./strategies/facebook');
+  const facebookStrategy = require('./strategies/facebook-token');
 
   passport.serializeUser((user, done) => done(null, user));
   passport.deserializeUser((user, done) => done(null, user));
