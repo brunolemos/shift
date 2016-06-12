@@ -27,6 +27,6 @@ module.exports = (app) => {
 
   // Get device transactions (history)
   app.get('/:id/transactions', (req, res) => {
-    Transaction.find({ device: req.params.id}).populate('owner').exec(errorHandler(res));
+    Transaction.find({ device: req.params.id}).populate(['owner', 'device']).exec(errorHandler(res));
   });
 };
