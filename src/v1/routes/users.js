@@ -39,6 +39,6 @@ module.exports = (app) => {
 
   // Get user transactions (history)
   app.get('/:id/transactions', (req, res) => {
-    Transaction.find({ owner: req.params.id}).populate('owner').exec(errorHandler(res));
+    Transaction.find({ owner: req.params.id}).populate(['owner', 'device']).exec(errorHandler(res));
   });
 };
