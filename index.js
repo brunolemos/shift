@@ -6,17 +6,15 @@ const bodyParser = require('body-parser');
 const https = require('https');
 const fs = require('fs');
 
-const config = require('./config');
-
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 
 require('./src/v1/routes')(app);
 
 const server = app.listen(process.env.PORT || 3000, () => {
-  const host = server.address().address;
+  const host = server.address().address.replace('::', 'localhost');
   const port = server.address().port;
-  console.log(`[SERVER] Running at http://${host}:${port}`);
+  console.log(`Running at http://${host}:${port}`);
 });
 
 server.on('error', (e) => {
