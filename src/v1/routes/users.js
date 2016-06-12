@@ -4,13 +4,14 @@ const passport = require('passport');
 const User = require('../models/user');
 const Device = require('../models/device');
 const errorHandler = require('../../../lib/error-handler');
+const ensureLogin = require('../middlewares/ensure-login');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
     User.find({}, errorHandler(res));
   });
 
-  app.get('/me', (req, res) => {
+  app.get('/me', ensureLogin, (req, res) => {
     res.json(req.user || {});
   });
 
