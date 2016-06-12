@@ -3,12 +3,13 @@
 const passport = require('passport');
 const User = require('../models/user');
 const Device = require('../models/device');
+const Transaction = require('../models/transaction');
 const errorHandler = require('../../../lib/error-handler');
 const ensureLogin = require('../middlewares/ensure-login');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
-    User.find({}, errorHandler(res));
+    User.find(req.query || {}, errorHandler(res));
   });
 
   app.get('/me', ensureLogin, (req, res) => {
@@ -34,5 +35,10 @@ module.exports = (app) => {
   // Get user devices (history)
   app.get('/:id/devices', (req, res) => {
     Device.find({ owner: req.params.id }, errorHandler(res));
+  });
+
+  // Get user transactions (history)
+  app.get('/:id/transactions', (req, res) => {
+    Transaction.find({ owner: req.params.id}).populate('owner').exec(errorHandler(res));
   });
 };

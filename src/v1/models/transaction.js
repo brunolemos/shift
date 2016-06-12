@@ -3,15 +3,17 @@
 const mongoose = require('../../../config/mongoose');
 const { DeviceSchema } = require('./device');
 const { Schema } = mongoose;
+const Device = require('../models/device');
 
 const TransactionSchema = new Schema({
   device: { type: Schema.Types.ObjectId, ref: 'Device', required: true },
-  name: { type: String, required: true },
-  description: { type: String },
-  image: { type: String },
-  value: { type: Number, required: true },
-  amountReceived: { type: Number }
+  owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  value: { type: Number, required: true }
 }, { timestamps: {} });
+
+TransactionSchema.post('save', (doc) => {
+  Device.findByIdAndUpdate(doc.device, {$inc: {amountReceived: doc.value}}, {new: true}, console.log);
+});
 
 module.exports = mongoose.model('Transaction', TransactionSchema);
 module.exports.TransactionSchema = TransactionSchema;
