@@ -1,22 +1,25 @@
 'use strict';
 
-const mongoose = require('../../../config/mongoose').default;
+const mongoose = require('../../../config/mongoose');
 const { Schema } = mongoose;
 
-const AccountSchema = new Schema({
+const FacebookAccountSchema = new Schema({
   _id: { type: String, required: true },
-  provider: { type: String, required: true },
-  token: { type: String, required: true },
+  accessToken: { type: String, required: true },
+  refreshToken: { type: String },
   scope: { type: String }
-}, { timestamps: {} });
+});
 
 const UserSchema = new Schema({
   name: { type: String, required: true },
-  email: { type: String },
+  email: { type: String, required: true },
+  gender: { type: String },
   phone: { type: String },
-  accounts: { type: [AccountSchema] }
+  accounts: {
+    facebook: { type: FacebookAccountSchema }
+  }
 }, { timestamps: {} });
 
-module.exports.default = mongoose.model('User', UserSchema);
-module.exports.AccountSchema = AccountSchema;
+module.exports = mongoose.model('User', UserSchema);
+module.exports.AccountSchema = FacebookAccountSchema;
 module.exports.UserSchema = UserSchema;

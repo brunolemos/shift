@@ -1,16 +1,11 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const config = require('./config');
 
-var uristring = process.env.MONGODB_URI ||
-                'mongodb://localhost/shift';
+mongoose.connect(config.db.url);
 
-mongoose.connect(uristring, function (err, res) {
-  if (err) {
-    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-  } else {
-    console.log ('Succeeded connected to: ' + uristring);
-  }
-});
+mongoose.connection.on('connected', () => console.log(`Database connected at ${config.db.url}`));
+mongoose.connection.on('error', (err) => console.error(`Database error: ${err}`));
 
-module.exports.default = mongoose;
+module.exports = mongoose;

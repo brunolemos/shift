@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('../../../config/mongoose').default;
+const mongoose = require('../../../config/mongoose');
 const { UserSchema } = require('./user');
 const { Schema } = mongoose;
 
@@ -14,5 +14,5 @@ const DeviceSchema = new Schema({
   image: { type: String }
 }, { timestamps: {} });
 
-module.exports.default = mongoose.model('Device', DeviceSchema);
+module.exports = mongoose.model('Device', DeviceSchema);
 module.exports.DeviceSchema = DeviceSchema;

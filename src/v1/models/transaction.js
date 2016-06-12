@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('../../../config/mongoose').default;
+const mongoose = require('../../../config/mongoose');
 const { DeviceSchema } = require('./device');
 const { Schema } = mongoose;
 
@@ -13,5 +13,5 @@ const TransactionSchema = new Schema({
   amountReceived: { type: Number }
 }, { timestamps: {} });
 
-module.exports.default = mongoose.model('Transaction', TransactionSchema);
+module.exports = mongoose.model('Transaction', TransactionSchema);
 module.exports.TransactionSchema = TransactionSchema;

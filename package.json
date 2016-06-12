@@ -22,11 +22,14 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "fs": "0.0.2",
     "https": "^1.0.0",
     "mongodb": "^2.1.18",
     "mongoose": "^4.4.20",
     "nodemon": "^1.9.2",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "require-dir": "^0.3.0"
   }
 }

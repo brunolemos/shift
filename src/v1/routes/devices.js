@@ -1,8 +1,8 @@
 'use strict';
 
-const Device = require('../models/device').default;
-const Transaction = require('../models/transaction').default;
-const errorHandler = require('../../../lib/error-handler').default;
+const Device = require('../models/device');
+const Transaction = require('../models/transaction');
+const errorHandler = require('../../../lib/error-handler');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {

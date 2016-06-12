@@ -1,12 +1,17 @@
 'use strict';
 
-const User = require('../models/user').default;
-const Device = require('../models/device').default;
-const errorHandler = require('../../../lib/error-handler').default;
+const passport = require('passport');
+const User = require('../models/user');
+const Device = require('../models/device');
+const errorHandler = require('../../../lib/error-handler');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
     User.find({}, errorHandler(res));
+  });
+
+  app.get('/me', (req, res) => {
+    res.json(req.user || {});
   });
 
   app.post('/', (req, res) => {
@@ -17,7 +22,7 @@ module.exports = (app) => {
     User.findById(req.params.id, errorHandler(res));
   });
 
-  app.put('/:id', function (req, res) {
+  app.put('/:id', (req, res) => {
     User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, errorHandler(res));
   });
 
@@ -27,6 +32,6 @@ module.exports = (app) => {
 
   // Get user devices (history)
   app.get('/:id/devices', (req, res) => {
-    Device.find({ 'owner': req.params.id }, errorHandler(res));
+    Device.find({ owner: req.params.id }, errorHandler(res));
   });
 };

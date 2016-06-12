@@ -2,14 +2,11 @@
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
-    res.status(200).json({});
+    res.json(true);
   });
 
-  app.post('/login', (req, res) => {
-    res.send('POST request to login');
-  });
-
-  app.post('/logout', (req, res) => {
-    res.send('POST request to logout');
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.json(true);
   });
 };
