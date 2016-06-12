@@ -14,7 +14,7 @@ module.exports = (app) => {
   });
 
   app.get('/:id', (req, res) => {
-    Device.findById(req.params.id, errorHandler(res));
+    Device.findById(req.params.id).populate('owner').exec(errorHandler(res));
   });
 
   app.put('/:id', (req, res) => {
