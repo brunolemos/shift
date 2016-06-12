@@ -11,9 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 
 require('./src/v1/routes/_routes')(app);
 
-const User = require('./src/models/user').default;
-const Device = require('./src/models/device').default;
-
 const server = app.listen(process.env.PORT || 3000, () => {
   const host = server.address().address.replace('::', 'localhost');
   const port = server.address().port;

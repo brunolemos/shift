@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('../../config/mongoose').default;
+const mongoose = require('../../../config/mongoose').default;
 const { UserSchema } = require('./user');
 const { Schema } = mongoose;
 
