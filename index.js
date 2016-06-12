@@ -9,7 +9,7 @@ const fs = require('fs');
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 
-require('./src/v1/routes')(app);
+require('./src/v1/routes/_routes')(app);
 
 const User = require('./src/models/user').default;
 const Device = require('./src/models/device').default;

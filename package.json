@@ -23,6 +23,7 @@
     "https": "^1.0.0",
     "mongodb": "^2.1.18",
     "mongoose": "^4.4.20",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "require-dir": "^0.3.0"
   }
 }
