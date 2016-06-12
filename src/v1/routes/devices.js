@@ -1,6 +1,7 @@
 'use strict';
 
 const Device = require('../models/device').default;
+const Transaction = require('../models/transaction').default;
 const errorHandler = require('../../../lib/error-handler').default;
 
 module.exports = (app) => {
@@ -26,5 +27,10 @@ module.exports = (app) => {
 
   app.delete('/:id', (req, res) => {
     Device.findByIdAndRemove(req.params.id, errorHandler(res));
+  });
+
+  // Get device transactions (history)
+  app.get('/:id/transactions', (req, res) => {
+    Transaction.find({ 'device': req.params.id}, errorHandler(res));
   });
 };

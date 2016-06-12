@@ -23,4 +23,5 @@ module.exports = (app) => {
   app.delete('/:id', (req, res) => {
     Transaction.findByIdAndRemove(req.params.id, errorHandler(res));
   });
+
 };
