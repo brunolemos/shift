@@ -5,11 +5,11 @@ const { DeviceSchema } = require('./device');
 const { Schema } = mongoose;
 const Device = require('../models/device');
 
-var Simplify = require("simplify-commerce"),
-client = Simplify.getClient({
-    publicKey: 'sbpb_MDYzNjdmYjYtOGFmMC00MWQ4LTg4MTEtYzM2YjBmM2VjYTlk',
-    privateKey: 'GXUTmeqkkh6jxtouxcZrv3tVLYl4KDr5KCIXldB99AB5YFFQL0ODSXAOkNtXTToq'
-});
+// var Simplify = require("simplify-commerce"),
+// client = Simplify.getClient({
+//     publicKey: 'sbpb_MDYzNjdmYjYtOGFmMC00MWQ4LTg4MTEtYzM2YjBmM2VjYTlk',
+//     privateKey: 'GXUTmeqkkh6jxtouxcZrv3tVLYl4KDr5KCIXldB99AB5YFFQL0ODSXAOkNtXTToq'
+// });
 
 // client.payment.create(function(data) => {
 //     amount : "1000",
@@ -34,7 +34,6 @@ const TransactionSchema = new Schema({
 
 TransactionSchema.post('save', (doc) => {
   Device.findByIdAndUpdate(doc.device, {$inc: {amountReceived: doc.value}}, {new: true}, console.log);
-  Simplify.pay(doc);
 });
 
 module.exports = mongoose.model('Transaction', TransactionSchema);
