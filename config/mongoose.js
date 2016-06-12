@@ -1,7 +1,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const config = require('./config').default;
 
 var uristring = process.env.MONGOLAB_URI ||
                 process.env.MONGOHQ_URL ||
