@@ -34,11 +34,19 @@ module.exports = (app) => {
 
   // Get user devices (history)
   app.get('/:id/devices', (req, res) => {
-    Device.find({ owner: req.params.id }, errorHandler(res));
+    Device.find({ owner: req.params.id }),populate('owner').exec(errorHandler(res));
   });
 
   // Get user transactions (history)
   app.get('/:id/transactions', (req, res) => {
-    Transaction.find({ owner: req.params.id}).populate(['owner', 'device']).exec(errorHandler(res));
+    Transaction.find({ owner: req.params.id}).populate(['owner', 'device']).exec(function(err, item) {
+
+      var options = {
+        path: 'device.owner',
+        model: 'User'
+      };
+
+      User.populate(item, options, errorHandler(res));
+    });
   });
 };
