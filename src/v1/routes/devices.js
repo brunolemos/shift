@@ -6,7 +6,7 @@ const errorHandler = require('../../../lib/error-handler');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
-    Device.find({}).populate('owner').exec(errorHandler(res));
+    Device.find(req.query || {}).populate('owner').exec(errorHandler(res));
   });
 
   app.post('/', (req, res) => {
@@ -15,10 +15,6 @@ module.exports = (app) => {
 
   app.get('/:id', (req, res) => {
     Device.findById(req.params.id, errorHandler(res));
-  });
-
-  app.get('/uuid/:uuid', (req, res) => {
-    Device.findOne({ 'uuid': req.params.uuid}).populate('owner').exec(errorHandler(res));
   });
 
   app.put('/:id', (req, res) => {
