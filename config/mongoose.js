@@ -2,8 +2,7 @@
 
 const mongoose = require('mongoose');
 
-var uristring = process.env.MONGOLAB_URI ||
-                process.env.MONGOHQ_URL ||
+var uristring = process.env.MONGODB_URI ||
                 'mongodb://localhost/shift';
 
 mongoose.connect(uristring, function (err, res) {
