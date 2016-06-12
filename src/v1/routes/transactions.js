@@ -1,19 +1,22 @@
 'use strict';
 
+const Transaction = require('../models/transaction').default;
+const errorHandler = require('../../../lib/error-handler').default;
+
 module.exports = (app) => {
   app.get('/', (req, res) => {
-    res.status(200).json({});
+    Transaction.find({}).populate('owner').exec(errorHandler(res));
   });
 
   app.post('/', (req, res) => {
-    res.send('POST request to add transaction');
+    new Transaction(req.body).save(errorHandler(res));
   });
 
   app.get('/:id', (req, res) => {
-    res.status(200).json({});
+    Transaction.findById(req.params.id, errorHandler(res));
   });
 
   app.put('/:id', function (req, res) {
-    res.send('PUT request to update transaction');
+    Transaction.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, errorHandler(res));
   });
 };

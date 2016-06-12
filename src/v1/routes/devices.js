@@ -1,19 +1,22 @@
 'use strict';
 
+const Device = require('../models/device').default;
+const errorHandler = require('../../../lib/error-handler').default;
+
 module.exports = (app) => {
   app.get('/', (req, res) => {
-    res.status(200).json({});
+    Device.find({}).populate('owner').exec(errorHandler(res));
   });
 
   app.post('/', (req, res) => {
-    res.send('POST request to add device');
+    new Device(req.body).save(errorHandler(res));
   });
 
   app.get('/:id', (req, res) => {
-    res.status(200).json({});
+    Device.findById(req.params.id, errorHandler(res));
   });
 
   app.put('/:id', function (req, res) {
-    res.send('PUT request to update device');
+    Device.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, errorHandler(res));
   });
 };

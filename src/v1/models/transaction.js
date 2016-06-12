@@ -5,8 +5,7 @@ const { DeviceSchema } = require('./device');
 const { Schema } = mongoose;
 
 const TransactionSchema = new Schema({
-  _id: { type: Schema.Types.ObjectId },
-  device: { type: ObjectId, ref: DeviceSchema, required: true },
+  device: { type: Schema.Types.ObjectId, ref: 'Device', required: true },
   name: { type: String, required: true },
   description: { type: String },
   image: { type: String },
