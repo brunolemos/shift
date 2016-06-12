@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('../../config/mongoose');
+const mongoose = require('../../config/mongoose').default;
 const { Schema } = mongoose;
 
 const AccountSchema = new Schema({
@@ -11,11 +11,12 @@ const AccountSchema = new Schema({
 }, { timestamps: {} });
 
 const UserSchema = new Schema({
-  deviceId: { type: Schema.Types.ObjectId },
   name: { type: String, required: true },
   email: { type: String },
   phone: { type: String },
   accounts: { type: [AccountSchema] }
 }, { timestamps: {} });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports.default = mongoose.model('User', UserSchema);
+module.exports.AccountSchema = AccountSchema;
+module.exports.UserSchema = UserSchema;

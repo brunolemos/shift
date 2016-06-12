@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+module.exports.default = {
   db: {
     URI: 'mongodb://localhost/shift'
   }
