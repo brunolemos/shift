@@ -4,7 +4,7 @@ const passport = require('passport');
 const config = require('../../../../../config/config');
 
 module.exports = (app) => {
-  app.post('/', passport.authenticate('facebook-token', { scope: config.integrations.facebook.scope }), (req, res) => {
+  app.post('/', passport.authenticate('facebook-token'), (req, res) => {
     res.json(req.user);
   });
 

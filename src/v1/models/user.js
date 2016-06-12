@@ -6,8 +6,7 @@ const { Schema } = mongoose;
 const FacebookAccountSchema = new Schema({
   _id: { type: String, required: true },
   token: { type: String, required: true },
-  refreshToken: { type: String },
-  scope: { type: String }
+  refreshToken: { type: String }
 });
 
 const UserSchema = new Schema({
