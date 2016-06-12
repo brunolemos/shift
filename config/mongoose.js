@@ -3,9 +3,16 @@
 const mongoose = require('mongoose');
 const config = require('./config').default;
 
-mongoose.connect(config.db.URI);
+var uristring = process.env.MONGOLAB_URI ||
+                process.env.MONGOHQ_URL ||
+                'mongodb://localhost/shift';
 
-mongoose.connection.on('connected', () => console.log(`Database connected at ${config.db.URI}`));
-mongoose.connection.on('error', (err) => console.error(`Database error: ${err}`));
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+    console.log ('Succeeded connected to: ' + uristring);
+  }
+});
 
 module.exports.default = mongoose;
